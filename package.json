@@ -1,0 +1,27 @@
+{
+  "name": "degree",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000d\u0000e\u0000g\u0000r\u0000e\u0000e\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shmatovzhenya/degree.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shmatovzhenya/degree/issues"
+  },
+  "homepage": "https://github.com/shmatovzhenya/degree#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.14",
+    "jest": "^26.5.2"
+  }
+}
