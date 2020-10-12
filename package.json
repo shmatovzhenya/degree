@@ -23,5 +23,9 @@
     "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^26.0.14",
     "jest": "^26.5.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.16.1",
+    "nanoid": "^3.1.12"
   }
 }
