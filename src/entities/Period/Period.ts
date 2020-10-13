@@ -2,17 +2,9 @@ import { nanoid } from 'nanoid';
 
 import { Flavor } from '../../types';
 import { MemberId } from '../Member';
+import { Duration } from '../Duration';
 
 type PeriodId = Flavor<string, 'PeriodId'>;
-
-type Duration = {
-  years: number;
-  months: number;
-  weeks: number;
-  days: number;
-  hours: number;
-  minutes: number;
-};
 
 type Optional = {
   comment?: string;
@@ -79,5 +71,4 @@ class Period {
 
 export {
   Period,
-  Duration,
 };

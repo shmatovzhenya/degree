@@ -1,6 +1,5 @@
-import { Period, Duration } from './Period';
+import { Period } from './Period';
 
 export {
   Period,
-  Duration,
 };

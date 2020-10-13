@@ -1,7 +1,9 @@
 import { nanoid } from 'nanoid';
+import { isSameMonth } from 'date-fns';
 
 import { Flavor } from '../../types';
-import { Period, Duration } from '../Period';
+import { Duration } from '../Duration';
+import { Period } from '../Period';
 import { Estimation } from '../Estimation';
 import { MemberId } from '../Member';
 
@@ -15,7 +17,7 @@ type Optional = {
 type TimeReport = {
   worked: Duration;
   billed: Duration;
-  overtimed?: Duration;
+  overtimed: Duration;
 };
 
 class Task {
@@ -60,14 +62,49 @@ class Task {
     });
   }
 
-  // getWorkedHoursByMemberId(id: MemberId): TimeReport {
-  //   const result: TimeReport = {
-  //   };
+  getWorkedHoursByMemberIdInMonth(id: MemberId, month?: Date): TimeReport {
+    const date = month ? month : new Date();
+    const source: TimeReport = {
+      worked: new Duration(),
+      billed: new Duration(),
+      overtimed: new Duration(),
+    };
 
-  //   this.#periods.filter((period) => {
-  //     return period.memberId === id;
-  //   }).reduce((result, item) => {
-  //     result.billed
-  //   }, result);
-  // }
+    const result: TimeReport = this.#periods.filter((period) => {
+      return period.memberId === id && isSameMonth(period.startDate, date);
+    }).reduce((result: TimeReport, item: Period): TimeReport => {
+      result.billed.concat(item.billedHours);
+      result.worked.concat(item.workedHours);
+      result.overtimed.concat(item.overTime);
+
+      return result;
+    }, source);
+
+    return result;
+  }
+
+  getUnbilledTimePerUserInMonth(id: MemberId, month?: Date): Duration {
+    const dump: TimeReport = this.getWorkedHoursByMemberIdInMonth(id, month);
+
+    if (!this.#billable) {
+      return dump.worked;
+    }
+
+    const nextDump = new Duration(dump.worked);
+    nextDump.substitute(dump.billed);
+
+    return nextDump;
+  }
+
+  getOvertimedPerUserInMonth(id: MemberId, month?: Date): Duration {
+    const dump: TimeReport = this.getWorkedHoursByMemberIdInMonth(id, month);
+
+    return dump.overtimed;
+  }
+
+  hasUserOvertimedInMonth(id: MemberId, month?: Date): boolean {
+    const dump: TimeReport = this.getWorkedHoursByMemberIdInMonth(id, month);
+    
+    return dump.overtimed.isEmpty();
+  }
 }
