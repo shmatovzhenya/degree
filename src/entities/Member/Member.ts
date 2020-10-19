@@ -31,4 +31,5 @@ const DefaultMember = new Member('', '');
 export {
   MemberId,
   DefaultMember,
+  Member,
 };

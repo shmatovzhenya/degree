@@ -6,6 +6,7 @@ import { Duration } from '../Duration';
 import { Period } from '../Period';
 import { Estimation } from '../Estimation';
 import { MemberId } from '../Member';
+import { th } from 'date-fns/locale';
 
 type TaskId = Flavor<string, 'TaskId'>;
 
@@ -48,8 +49,20 @@ class Task {
     return this.#id;
   }
 
+  get estimation(): Estimation {
+    return this.#estimation;
+  }
+
+  get billedHours(): Duration {
+    return this.#billedHours;
+  }
+
   get name(): string {
     return this.#name;
+  }
+
+  set billable(isBillable: boolean) {
+    this.#billable = isBillable;
   }
 
   addWorkingPeriod(period: Period): void {
@@ -83,6 +96,45 @@ class Task {
     return result;
   }
 
+  getUnbilledTimePerMonth(month?: Date): Duration {
+    const result = new Duration();
+
+    if (this.#billable) {
+      this.#periods.reduce((result, item): Duration => {
+        const duration = new Duration(item.workedHours);
+        
+        duration.substitute(item.billedHours);
+        result.concat(duration);
+
+        return result;
+      }, result);
+    } else {
+      this.#periods.reduce((result, item): Duration => {
+        const duration = new Duration(item.workedHours);
+        
+        result.concat(duration);
+
+        return result;
+      }, result);
+    }
+
+    return result;
+  }
+
+  getOvertimedHoursInMonth(month: Date = new Date()): Duration {
+    if (!this.#billable) {
+      return new Duration();
+    }
+
+    const result = new Duration();
+
+    this.#periods.forEach(period => {
+      result.concat(period.overTime);
+    });
+
+    return result;
+  }
+
   getUnbilledTimePerUserInMonth(id: MemberId, month?: Date): Duration {
     const dump: TimeReport = this.getWorkedHoursByMemberIdInMonth(id, month);
 
@@ -97,6 +149,10 @@ class Task {
   }
 
   getOvertimedPerUserInMonth(id: MemberId, month?: Date): Duration {
+    if (!this.#billable) {
+      return new Duration();
+    }
+
     const dump: TimeReport = this.getWorkedHoursByMemberIdInMonth(id, month);
 
     return dump.overtimed;
@@ -108,3 +164,7 @@ class Task {
     return dump.overtimed.isEmpty();
   }
 }
+
+export {
+  Task, TimeReport,
+};

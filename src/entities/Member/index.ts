@@ -1,6 +1,7 @@
-import { MemberId, DefaultMember } from './Member';
+import { MemberId, DefaultMember, Member } from './Member';
 
 export {
   MemberId,
   DefaultMember,
+  Member,
 };
