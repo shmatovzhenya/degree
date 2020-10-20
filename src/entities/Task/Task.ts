@@ -121,6 +121,20 @@ class Task {
     return result;
   }
 
+  getWorkedHoursPerMonth(month: Date = new Date()): Duration {
+    if (!this.#billable) {
+      return new Duration();
+    }
+
+    const result = new Duration();
+
+    this.#periods.forEach(period => {
+      result.concat(period.workedHours);
+    });
+
+    return result;
+  }
+
   getOvertimedHoursInMonth(month: Date = new Date()): Duration {
     if (!this.#billable) {
       return new Duration();
