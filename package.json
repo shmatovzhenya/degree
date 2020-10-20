@@ -4,6 +4,7 @@
   "description": "��#\u0000 \u0000d\u0000e\u0000g\u0000r\u0000e\u0000e\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
+    "start": "rimraf ./dist && cross-env NODE_ENV=development rollup --config --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,8 +22,29 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
+    "@pyoner/svelte-types": "^3.4.4-2",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
     "@types/jest": "^26.0.14",
-    "jest": "^26.5.2"
+    "@types/nanoid": "^2.1.0",
+    "cross-env": "^7.0.2",
+    "jest": "^26.5.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.32.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-html2": "^2.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-serve": "^1.0.4",
+    "rollup-plugin-svelte": "^6.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^3.29.0",
+    "svelte-preprocess": "^4.5.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "date-fns": "^2.16.1",
