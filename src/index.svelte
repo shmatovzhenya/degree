@@ -18,5 +18,8 @@
     cursor: default;
   }
 </style>
-
+<form>
+  <input type="file" accept="csv">
+  <input type="submit" value="Загрузить CSV">
+</form>
 <h1>{a} + {b} + {c}</h1>

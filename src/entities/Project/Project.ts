@@ -2,6 +2,7 @@ import { UserRoleBuilder } from '../UserRole';
 import { Task } from '../Task';
 import { MemberId, Member } from '../Member';
 import { Duration } from '../Duration';
+import { Estimate } from '../Estimation';
 
 type UserRole = ReturnType<typeof UserRoleBuilder.prototype.getOrCreate>;
 
@@ -19,6 +20,10 @@ class Project {
 
   constructor(name: string) {
     this.#name = name;
+  }
+
+  get name(): string {
+    return this.#name;
   }
 
   addTasksList(taskList: Task[]): void {
@@ -95,7 +100,26 @@ class Project {
 
       this.#byRoles[role].forEach((member) => {
         this.#taskList.forEach(task => {
-          roles[role].concat(task.getWorkedHoursByMemberIdInMonth(member.id).overtimed);
+          roles[role].concat(task.getWorkedHoursByMemberIdInMonth(member.id, month).overtimed);
+        });
+      });
+    });
+
+    return roles;
+  }
+
+  getOverEstimatedTimesByRolesPerMonth(month: Date = new Date()): Record<string, Duration> {
+    const roles: Record<string, Duration> = {};
+
+    Object.keys(this.#byRoles).forEach(role => {
+      roles[role] = new Duration();
+
+      this.#byRoles[role].forEach((member) => {
+        this.#taskList.forEach(task => {
+          const worked = task.getWorkedHoursByMemberIdInMonth(member.id, month);
+
+          roles[role].concat(worked.worked);
+          roles[role].substitute(worked.billed);
         });
       });
     });
@@ -111,7 +135,7 @@ class Project {
 
       this.#byRoles[role].forEach((member) => {
         this.#taskList.forEach(task => {
-          roles[role].concat(task.getUnbilledTimePerUserInMonth(member.id));
+          roles[role].concat(task.getUnbilledTimePerUserInMonth(member.id, month));
         });
       });
     });

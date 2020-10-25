@@ -6,7 +6,6 @@ import { Duration } from '../Duration';
 import { Period } from '../Period';
 import { Estimation } from '../Estimation';
 import { MemberId } from '../Member';
-import { th } from 'date-fns/locale';
 
 type TaskId = Flavor<string, 'TaskId'>;
 
@@ -142,9 +141,11 @@ class Task {
 
     const result = new Duration();
 
-    this.#periods.forEach(period => {
-      result.concat(period.overTime);
-    });
+    this.#periods
+      .filter(period => isSameMonth(period.startDate, month))
+      .forEach(period => {
+        result.concat(period.overTime);
+      });
 
     return result;
   }

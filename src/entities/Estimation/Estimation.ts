@@ -1,13 +1,14 @@
 import { MemberId, DefaultMember } from '../Member';
+import { Duration } from '../Duration';
 import { UserRoleBuilder } from '../UserRole';
 
 type Estimate = {
   member: MemberId;
-  estimation: Date;
+  estimation: Duration;
 };
 
 type Options = {
-  estimation?: Date;
+  estimation?: Duration;
   estimationList?: Estimate[];
 };
 
@@ -34,4 +35,5 @@ class Estimation {
 
 export {
   Estimation,
+  Estimate,
 }

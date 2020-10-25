@@ -1,5 +1,5 @@
-import { Estimation } from './Estimation';
+import { Estimation, Estimate } from './Estimation';
 
 export {
-  Estimation,
+  Estimation, Estimate,
 };
