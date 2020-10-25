@@ -1,6 +1,5 @@
 import { MemberId, DefaultMember } from '../Member';
 import { Duration } from '../Duration';
-import { UserRoleBuilder } from '../UserRole';
 
 type Estimate = {
   member: MemberId;

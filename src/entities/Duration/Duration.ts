@@ -1,10 +1,10 @@
 type Options = {
-  years: number;
-  months: number;
-  weeks: number;
-  days: number;
-  hours: number;
-  minutes: number;
+  years?: number;
+  months?: number;
+  weeks?: number;
+  days?: number;
+  hours?: number;
+  minutes?: number;
 };
 
 class Duration {
@@ -77,4 +77,5 @@ class Duration {
 
 export {
   Duration,
+  Options,
 }

@@ -1,5 +1,6 @@
-import { Duration } from './Duration';
+import { Duration, Options } from './Duration';
 
 export {
   Duration,
+  Options,
 };
