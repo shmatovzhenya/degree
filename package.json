@@ -25,6 +25,7 @@
     "@pyoner/svelte-types": "^3.4.4-2",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.3.3",
     "@rollup/plugin-typescript": "^6.0.0",
     "@types/jest": "^26.0.14",
     "@types/nanoid": "^2.1.0",

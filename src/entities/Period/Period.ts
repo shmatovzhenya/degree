@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-
+import { uniqueId } from '../utils/uniqueId';
 import { Flavor } from '../../types';
 import { MemberId } from '../Member';
 import { Duration } from '../Duration';
@@ -22,7 +21,7 @@ class Period {
   #memberId: MemberId;
 
   constructor(startDate: Date, workedHours: Duration, memberId: MemberId, optional?: Optional) {
-    this.#id = nanoid();
+    this.#id = uniqueId();
     this.#startDate = startDate;
     this.#workedHours = workedHours;
     this.#memberId = memberId;

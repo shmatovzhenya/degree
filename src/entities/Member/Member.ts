@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-
+import { uniqueId } from '../utils/uniqueId';
 import { Flavor } from '../../types'
 
 type MemberId = Flavor<string, 'MemberId'>;
@@ -10,7 +9,7 @@ class Member {
   #secondName: string;
 
   constructor(firstName: string, secondName: string) {
-    this.#id = nanoid();
+    this.#id = uniqueId();
     this.#firstName = firstName;
     this.#secondName = secondName;
   }

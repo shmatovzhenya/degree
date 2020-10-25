@@ -126,3 +126,7 @@ const loader = (CSVFile: string[][]) => {
 
   return project;
 };
+
+export {
+  loader,
+};

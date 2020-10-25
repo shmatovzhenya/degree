@@ -8,10 +8,14 @@ import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import livereload from "rollup-plugin-livereload";
 import sveltePreprocessor from "svelte-preprocess";
+import replace from '@rollup/plugin-replace';
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
 const plugins = [
+  replace({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE || 'DEVELOPMENT')
+  }),
   svelte({
     dev: isDevelopment,
     extensions: [".svelte"],

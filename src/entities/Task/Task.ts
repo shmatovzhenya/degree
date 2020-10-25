@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { uniqueId } from '../utils/uniqueId';
 import { isSameMonth } from 'date-fns';
 
 import { Flavor } from '../../types';
@@ -29,7 +29,7 @@ class Task {
   #periods: Period[] = [];
 
   constructor(name: string, estimation: Estimation, optional: Optional) {
-    this.#id = nanoid();
+    this.#id = uniqueId();
     this.#name = name;
     this.#estimation = estimation;
 
