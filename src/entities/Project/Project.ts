@@ -26,12 +26,29 @@ class Project {
     return this.#name;
   }
 
+  get membersList(): string[] {
+    return this.#memberList.map(member => member.fullName);
+  }
+
+  get taskNames(): string[] {
+    return this.#taskList.map(task => task.name);
+  }
+
+  getMemberByFullName(name: string): Member {
+    return this.#memberList
+      .filter(member => member.fullName === name)[0] || this.#memberList[0];
+  }
+
+  getTaskByName(name: string): Task {
+    return this.#taskList.find(task => task.name === name) || this.#taskList[0];
+  }
+
   addTasksList(taskList: Task[]): void {
-    this.#taskList.concat(taskList);
+    this.#taskList = this.#taskList.concat(taskList);
   }
 
   addMembers(memberList: Member[]): void {
-    this.#memberList.concat(memberList);
+    this.#memberList = this.#memberList.concat(memberList);
   }
 
   addMemberToRoleRelation(member: Member, role: UserRole): void {

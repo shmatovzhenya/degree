@@ -33,12 +33,12 @@ class Duration {
   }
 
   concat(another: Duration): void {
-    this.#years += another.#years;
-    this.#months += another.#months;
-    this.#weeks += another.#weeks;
-    this.#days += another.#days;
-    this.#hours += another.#hours;
-    this.#minutes += another.#minutes;
+    this.#years += another.years;
+    this.#months += another.months;
+    this.#weeks += another.weeks;
+    this.#days += another.days;
+    this.#hours += another.hours;
+    this.#minutes += another.minutes;
   }
 
   substitute(another: Duration): void {
@@ -72,6 +72,32 @@ class Duration {
 
   get minutes(): number {
     return this.#minutes;
+  }
+
+  toString(): string {
+    let result: string = '';
+
+    if (this.#years) {
+      result += `${this.#years} лет`;
+    }
+
+    if (this.#months) {
+      result += `${this.#months} месяцев`;
+    }
+
+    if (this.#weeks) {
+      result += `${this.#weeks} недель`;
+    }
+
+    if (this.#hours) {
+      result += `${this.#hours} часов`;
+    }
+
+    if (this.#minutes) {
+      result += `${this.#minutes} минут`;
+    }
+
+    return result;
   }
 }
 

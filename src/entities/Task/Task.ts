@@ -85,9 +85,17 @@ class Task {
     const result: TimeReport = this.#periods.filter((period) => {
       return period.memberId === id && isSameMonth(period.startDate, date);
     }).reduce((result: TimeReport, item: Period): TimeReport => {
-      result.billed.concat(item.billedHours);
-      result.worked.concat(item.workedHours);
-      result.overtimed.concat(item.overTime);
+      if (item.billedHours) {
+        result.billed.concat(item.billedHours);
+      }
+
+      if (item.workedHours) {
+        result.worked.concat(item.workedHours);
+      }
+
+      if (item.overTime) {
+        result.overtimed.concat(item.overTime);
+      }
 
       return result;
     }, source);
